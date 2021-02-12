@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  mongo:
+    image: mongo:latest
+    volumes:
+      - mongodb-data:/data/db
+    ports:
+      - "27017:27017"
+  python:
+    build: .
+    command: python3 main.py
+    volumes:
+      - .:/code
+    depends_on:
+      - mongo
+
+volumes:
+  mongodb-data:
